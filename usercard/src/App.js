@@ -1,31 +1,48 @@
-import React, {Component} from 'react';
-import UserCard from './components/UserCard';
+import React, { Component } from "react";
+import UserCard from "./components/UserCard";
 
-import axios from 'axios';
-import './App.css';
+import axios from "axios";
+import "./App.css";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      users:[],
-      login:''
+      users: []
     };
-  };
+  }
 
   componentDidMount() {
     axios
-      .get('https://api.github.com/users')
+      .get("https://api.github.com/users")
       .then(res => {
         this.setState({
           users: res.data
         });
-        console.log('the cDM res is', res);
+        console.log("the cDM res is", res);
       })
-      .catch(err => console.log('the cDM error', err));
+      .catch(err => console.log("the cDM error", err));
   }
 
-  // componentDidUpdate(prevProps, prevState) {}
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.users !== prevState.users) {
+  //     console.log("inside first if?");
+  //     if (this.state.doggoText === "chihuahua") {
+  //       console.log("inside second if?");
+  //       axios
+  //         .get("https://api.github.com/users")
+  //         .then(res => {
+  //           // res.data.message
+  //           this.setState({
+  //             doggos: res.data.message,
+  //             doggoText: "husky"
+  //           });
+  //           console.log(res);
+  //         })
+  //         .catch(err => console.log(err));
+  //     }
+  //   }
+  // };
 
   // handleChanges = e => {};
 
@@ -35,12 +52,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="usercard">
+      <div className="App">
         {this.state.users.map(user => {
-            return <> <p>{user.login}</p> <p>{user.id}</p> <img width='150'src={user.avatar_url} /> </>
+          return (
+            <div className="users" key={user.id}>
+              <UserCard user={user}/>
+            </div>
+          );
         })}
-        
-        
       </div>
     );
   }

@@ -8,19 +8,20 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users:[]
+      users:[],
+      login:''
     };
   };
 
   componentDidMount() {
     axios
-      .get(`https://api.github.com/users/mojombo`)
+      .get('https://api.github.com/users')
       .then(res => {
         // res.data.message
-        this.setState({
-          users: res.data
-        });
-        console.log('the cDM res', res);
+        // this.setState({
+        //   users: res.data
+        // });
+        console.log('the cDM res is', res);
       })
       .catch(err => console.log('the cDM error', err));
   }
@@ -37,7 +38,7 @@ class App extends Component {
     return (
       <div className="usercard">
         {this.state.users.map(user => {
-            return <UserCard name={user.name} login={user.login} id={user.id} /> 
+            return <> name={user.name} login={user.login} id={user.id} </> 
         })}
         
         

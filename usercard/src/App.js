@@ -8,7 +8,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      users: [],
+      followers:''
     };
   }
 
@@ -24,31 +25,37 @@ class App extends Component {
       .catch(err => console.log("the cDM error", err));
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.users !== prevState.users) {
-  //     console.log("inside first if?");
-  //     if (this.state.doggoText === "chihuahua") {
-  //       console.log("inside second if?");
-  //       axios
-  //         .get("https://api.github.com/users")
-  //         .then(res => {
-  //           // res.data.message
-  //           this.setState({
-  //             doggos: res.data.message,
-  //             doggoText: "husky"
-  //           });
-  //           console.log(res);
-  //         })
-  //         .catch(err => console.log(err));
-  //     }
-  //   }
-  // };
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.users !== prevState.users) {
+      console.log("inside first if?");
+      if (this.state.followers === '') {
 
-  // handleChanges = e => {};
+        axios
+          .get('https://api.github.com/users')
+          .then(res => {
+            // res.data.message
+            this.setState({
+              users: res.data,
+              followers: "users"
+            });
+            console.log('cDU res is', res);
+          })
+          .catch(err => console.log('cDU error is', err));
+        }
+    }
+  };
 
-  // fetchUsers = e => {
-  //   e.preventDefault();
-  // };
+  handleChanges = e => {
+    this.setState({
+      followers: e.target.value
+    });
+  };
+
+  fetchFollowers = e => {
+    e.preventDefault();
+  }
+
+
 
   render() {
     return (

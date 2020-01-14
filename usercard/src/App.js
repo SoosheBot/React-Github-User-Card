@@ -17,28 +17,27 @@ class App extends Component {
     axios
       .get('https://api.github.com/users')
       .then(res => {
-        // res.data.message
-        // this.setState({
-        //   users: res.data
-        // });
+        this.setState({
+          users: res.data
+        });
         console.log('the cDM res is', res);
       })
       .catch(err => console.log('the cDM error', err));
   }
 
-  componentDidUpdate(prevProps, prevState) {}
+  // componentDidUpdate(prevProps, prevState) {}
 
-  handleChanges = e => {};
+  // handleChanges = e => {};
 
-  fetchUsers = e => {
-    e.preventDefault();
-  };
+  // fetchUsers = e => {
+  //   e.preventDefault();
+  // };
 
   render() {
     return (
       <div className="usercard">
         {this.state.users.map(user => {
-            return <> name={user.name} login={user.login} id={user.id} </> 
+            return <> <p>{user.login}</p> <p>{user.id}</p> <img width='150'src={user.avatar_url} /> </>
         })}
         
         

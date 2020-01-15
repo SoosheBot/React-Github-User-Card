@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import UserCard from "./components/UserCard";
+import React from "react";
+import User from './components/User';
+import Follower from './components/Follower';
 
-import axios from "axios";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <h1>GitHub Users</h1>
-      
+      <User />
+      <Follower />
     </div>
   )
 }

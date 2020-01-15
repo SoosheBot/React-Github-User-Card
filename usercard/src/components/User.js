@@ -21,10 +21,30 @@ class User extends Component {
       .catch(err => console.log("user cDM error:", err));
   }
 
+  fetchFollowers = e => {
+    e.preventDefault();
+    axios
+      .get(`https://api.github.com/users/sooshebot/followers`)
+      .then(res => {
+        this.setState({
+          followers: res.data
+        });
+        console.log("follower cDM res:", res);
+      })
+      .catch(err => console.log("follower cDM error:", err));
+  }
+
+  
+
+
   render() {
     return (
       <div>
         <UserCard img={this.state.img} username={this.state.username} />
+        <button onClick={this.fetchFollowers}>
+				Fetch Followers
+			</button>
+
       </div>
     );
   }

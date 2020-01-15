@@ -17,7 +17,7 @@ class Follower extends Component {
         console.log("follower cDM res:", res);
       })
       .catch(err => console.log("follower cDM error:", err));
-  }
+  } 
 
   render() {
     return (

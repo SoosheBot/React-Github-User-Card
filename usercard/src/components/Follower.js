@@ -1,34 +1,34 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-import FollowerCard from './FollowerCard';
+import React, { Component } from "react";
+import axios from "axios";
+import FollowerCard from "./FollowerCard";
 
 class Follower extends Component {
-    state = {
-        followers:[]
-    };
+  state = {
+    followers: []
+  };
 
-    componentDidMount(){
-        axios
-        .get(`https://api.github.com/users/${this.state.username}/followers`)
-        .then(res => {
-            this.setState({
-                followers:res.data
-            });
-            console.log('follower cDM res:', res)
-        })
-        .catch(err => console.log("follower cDM error:", err));
+  componentDidMount() {
+    axios
+      .get(`https://api.github.com/users/sooshebot/followers`)
+      .then(res => {
+        this.setState({
+          followers: res.data
+        });
+        console.log("follower cDM res:", res);
+      })
+      .catch(err => console.log("follower cDM error:", err));
+  }
 
-    };
-
-    render() {
-        render() {
-            return (
-              <div>
-                <FollowerCard img={this.state.img} username={this.state.username} />
-              </div>
-            );
-          }
-
-};
+  render() {
+    return (
+      <div>
+          {this.state.followers.map(follower => {
+              return <FollowerCard key={follower.id} follower={follower} />
+          })}
+        
+      </div>
+    );
+  }
+}
 
 export default Follower;
